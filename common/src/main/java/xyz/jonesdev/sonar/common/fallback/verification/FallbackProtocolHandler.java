@@ -46,8 +46,7 @@ public final class FallbackProtocolHandler extends FallbackVerificationHandler {
 
   @Override
   public void handle(final @NotNull FallbackPacket packet) {
-    if (packet instanceof TransactionPacket) {
-      final TransactionPacket transaction = (TransactionPacket) packet;
+    if (packet instanceof TransactionPacket transaction) {
       // Make sure we are expecting a transaction packet
       checkState(waitingTransaction, "unexpected transaction: " + transaction.getTransactionId());
       // Make sure the window ID is valid
@@ -80,9 +79,7 @@ public final class FallbackProtocolHandler extends FallbackVerificationHandler {
       }
 
       waitingTransaction = false;
-    } else if (packet instanceof SetHeldItemPacket) {
-      final SetHeldItemPacket heldItemPacket = (SetHeldItemPacket) packet;
-
+    } else if (packet instanceof SetHeldItemPacket heldItemPacket) {
       final int slotId = heldItemPacket.getSlot();
       // Also check if the player sent an invalid slot which is impossible by vanilla protocol
       checkState(slotId >= 0 && slotId <= 8, "slot out of range: " + slotId);

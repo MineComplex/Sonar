@@ -4,11 +4,11 @@ plugins {
   java
   alias(libs.plugins.shadow)
   alias(libs.plugins.indra.git)
-  alias(libs.plugins.spotless)
 }
 
 allprojects {
   repositories {
+    mavenLocal()
     mavenCentral()
     maven(url = "https://repo.jonesdev.xyz/releases/") // Bungee & Velocity proxy module
     maven(url = "https://s01.oss.sonatype.org/content/repositories/snapshots/") // libby
@@ -16,7 +16,6 @@ allprojects {
 
   apply(plugin = "java")
   apply(plugin = "com.gradleup.shadow")
-  apply(plugin = "com.diffplug.spotless")
 
   dependencies {
     compileOnly(rootProject.libs.lombok)
@@ -33,16 +32,6 @@ allprojects {
     compileOnly(rootProject.libs.libby.core)
   }
 
-  spotless {
-    java {
-      endWithNewline()
-      formatAnnotations()
-      removeUnusedImports()
-      trimTrailingWhitespace()
-      indentWithSpaces(2)
-    }
-  }
-
   tasks {
     shadowJar {
       // Set the file name of the shadowed jar
@@ -52,7 +41,6 @@ allprojects {
       isPreserveFileTimestamps = false
 
       // Relocate libraries
-      relocate("org.bstats", "xyz.jonesdev.sonar.libs.bstats")
       relocate("com.alessiodp.libby", "xyz.jonesdev.sonar.libs.libby")
       relocate("com.simpleyaml", "xyz.jonesdev.sonar.libs.yaml")
       relocate("com.google.gson", "xyz.jonesdev.sonar.libs.gson")
@@ -101,8 +89,8 @@ allprojects {
 tasks {
   // This is a small wrapper tasks to simplify the building process
   register("build-sonar") {
-    val subprojects = listOf("api", "captcha", "common", "bukkit", "bungeecord", "velocity")
-    val buildTasks = subprojects.flatMap { listOf("$it:clean", "$it:spotlessApply", "$it:shadowJar") }
+    val subprojects = listOf("api", "captcha", "common")
+    val buildTasks = subprojects.flatMap { listOf("$it:clean", "$it:shadowJar") }
     dependsOn(buildTasks)
   }
 }

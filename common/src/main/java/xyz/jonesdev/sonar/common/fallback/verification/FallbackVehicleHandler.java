@@ -56,9 +56,7 @@ public final class FallbackVehicleHandler extends FallbackVerificationHandler {
 
   @Override
   public void handle(final @NotNull FallbackPacket packet) {
-    if (packet instanceof KeepAlivePacket) {
-      final KeepAlivePacket keepAlivePacket = (KeepAlivePacket) packet;
-
+    if (packet instanceof KeepAlivePacket keepAlivePacket) {
       // Check if we are expecting a KeepAlive packet
       checkState(nextState != null, "invalid packet timing");
       // Also check if the KeepAlive ID matches the expected ID
@@ -115,11 +113,9 @@ public final class FallbackVehicleHandler extends FallbackVerificationHandler {
 
           handlePlayerInput();
         }
-      } else if (packet instanceof SetPlayerPositionRotationPacket) {
-        final SetPlayerPositionRotationPacket posRot = (SetPlayerPositionRotationPacket) packet;
+      } else if (packet instanceof SetPlayerPositionRotationPacket posRot) {
         handleMovement(posRot.getY(), posRot.isOnGround());
-      } else if (packet instanceof SetPlayerPositionPacket) {
-        final SetPlayerPositionPacket position = (SetPlayerPositionPacket) packet;
+      } else if (packet instanceof SetPlayerPositionPacket position) {
         handleMovement(position.getY(), position.isOnGround());
       }
     }

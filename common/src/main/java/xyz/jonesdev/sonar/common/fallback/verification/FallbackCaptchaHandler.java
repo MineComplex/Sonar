@@ -69,8 +69,7 @@ public final class FallbackCaptchaHandler extends FallbackVerificationHandler {
     final int maxDuration = Sonar.get0().getConfig().getVerification().getMap().getMaxDuration();
     checkState(!user.getLoginTimer().elapsed(maxDuration), "took too long to enter CAPTCHA");
 
-    if (packet instanceof SystemChatPacket) {
-      final SystemChatPacket chat = (SystemChatPacket) packet;
+    if (packet instanceof SystemChatPacket chat) {
       // Finish the verification if the player entered the correct code
       if (chat.getMessage().toLowerCase().equals(answer)) {
         finishVerification();

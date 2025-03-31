@@ -21,7 +21,6 @@ import lombok.experimental.UtilityClass;
 import org.jetbrains.annotations.NotNull;
 import xyz.jonesdev.sonar.api.Sonar;
 import xyz.jonesdev.sonar.api.config.SonarConfiguration;
-import xyz.jonesdev.sonar.api.update.UpdateChecker;
 import xyz.jonesdev.sonar.common.statistics.GlobalSonarStatistics;
 
 import java.sql.SQLException;
@@ -74,12 +73,6 @@ public final class ScheduledServiceManager {
 
     STATISTICS.scheduleAtFixedRate(GlobalSonarStatistics::hitEverySecond,
       0L, 1L, TimeUnit.SECONDS);
-
-    // This config setting only updates when the server is restarted
-    if (Sonar.get0().getConfig().getGeneralConfig().getBoolean("general.check-for-updates")) {
-      UPDATE_NOTIFIER.scheduleAtFixedRate(UpdateChecker::checkForUpdates,
-        0L, 2L, TimeUnit.HOURS);
-    }
   }
 
   public void stop() {

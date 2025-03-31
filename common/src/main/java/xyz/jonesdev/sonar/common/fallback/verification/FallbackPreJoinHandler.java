@@ -64,10 +64,8 @@ public final class FallbackPreJoinHandler extends FallbackVerificationHandler {
 
   @Override
   public void handle(final @NotNull FallbackPacket packet) {
-    if (packet instanceof KeepAlivePacket) {
-      // This is the first packet we expect from the client
-      final KeepAlivePacket keepAlive = (KeepAlivePacket) packet;
-
+    // This is the first packet we expect from the client
+    if (packet instanceof KeepAlivePacket keepAlive) {
       // Check if the KeepAlive ID matches the expected ID
       final long keepAliveId = keepAlive.getId();
       checkState(keepAliveId == expectedKeepAliveId,
@@ -99,9 +97,7 @@ public final class FallbackPreJoinHandler extends FallbackVerificationHandler {
         validateClientInformation();
       }
       markSuccess();
-    } else if (packet instanceof ClientInformationPacket) {
-      final ClientInformationPacket clientInformation = (ClientInformationPacket) packet;
-
+    } else if (packet instanceof ClientInformationPacket clientInformation) {
       if (!user.isGeyser()) {
         checkState(clientInformation.getViewDistance() >= 2,
           "view distance: " + clientInformation.getViewDistance());
@@ -114,9 +110,7 @@ public final class FallbackPreJoinHandler extends FallbackVerificationHandler {
         "sent unused bit flag: " + clientInformation.getSkinParts());
 
       receivedClientInfo = true;
-    } else if (packet instanceof PluginMessagePacket) {
-      final PluginMessagePacket pluginMessage = (PluginMessagePacket) packet;
-
+    } else if (packet instanceof PluginMessagePacket pluginMessage) {
       final boolean usingModernChannel = pluginMessage.getChannel().equals("minecraft:brand");
       final boolean usingLegacyChannel = pluginMessage.getChannel().equals("MC|Brand");
 

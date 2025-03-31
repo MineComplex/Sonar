@@ -3,9 +3,8 @@ dependencies {
   implementation(project(":common"))
 
   compileOnly(rootProject.libs.velocity)
+  compileOnly(rootProject.libs.velocityApi)
   testCompileOnly(rootProject.libs.velocity)
-
-  implementation(rootProject.libs.bstats.velocity)
   implementation(rootProject.libs.libby.velocity)
 }
 
@@ -24,5 +23,5 @@ tasks {
   }
 }
 
-java.sourceCompatibility = JavaVersion.VERSION_17
-java.targetCompatibility = JavaVersion.VERSION_17
+java.sourceCompatibility = JavaVersion.VERSION_21
+java.targetCompatibility = JavaVersion.VERSION_21

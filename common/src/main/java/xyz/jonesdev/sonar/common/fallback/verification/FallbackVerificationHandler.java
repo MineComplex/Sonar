@@ -101,7 +101,8 @@ public abstract class FallbackVerificationHandler implements FallbackPacketListe
     Sonar.get0().getEventManager().publish(new UserVerifyFailedEvent(user, reason));
 
     // Use a label, so we can easily add more code beneath this method in the future
-    blacklist: {
+    blacklist:
+    {
       final String hostAddress = user.getInetAddress().getHostAddress();
       final int score = Sonar.get0().getFallback().getBlacklist().get(hostAddress, __ -> 0);
       final int newScore = score + 1;

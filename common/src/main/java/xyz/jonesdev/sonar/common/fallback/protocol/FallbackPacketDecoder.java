@@ -82,7 +82,7 @@ public final class FallbackPacketDecoder extends ChannelInboundHandlerAdapter {
         // Check if the packet still has bytes left after we decoded it
         if (byteBuf.isReadable()) {
           throw ProtocolUtil.DEBUG ? new DecoderException("Could not read packet to end ("
-            + byteBuf.readableBytes() + " bytes left)"): QuietDecoderException.INSTANCE;
+            + byteBuf.readableBytes() + " bytes left)") : QuietDecoderException.INSTANCE;
         }
 
         // Let our verification handler process the packet

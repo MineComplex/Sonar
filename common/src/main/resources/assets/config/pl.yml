@@ -16,9 +16,6 @@
 
 # Ustawienia ogólne Sonar
 general:
-  # Czy Sonar powinien automatycznie sprawdzać dostępność nowych wersji?
-  # Sonar korzysta z API GitHub, aby sprawdzić, czy bieżąca wersja jest nieaktualna
-  check-for-updates: true
   # Czy Sonar powinien rejestrować adresy IP graczy w konsoli?
   log-player-addresses: true
   # Maksymalna liczba graczy online z tym samym adresem IP

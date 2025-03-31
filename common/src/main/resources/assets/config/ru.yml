@@ -16,9 +16,6 @@
 
 # Основные настройки
 general:
-  # Должен ли Sonar автоматически проверять наличие новых обновлений?
-  # Sonar использует API GitHub, чтобы проверить, не устарела ли текущая версия
-  check-for-updates: true
   # Должен ли Sonar логировать IP-адреса игроков в консоли?
   log-player-addresses: true
   # Максимальное количество игроков онлайн с одного IP-адреса
@@ -208,4 +205,4 @@ verification:
   # Полный список всех идентификаторов протоколов можно найти здесь:
   # https://wiki.vg/Protocol_version_numbers
   # Например, Minecraft 1.20 имеет ID 763.
-  blacklisted-protocols: []
+  blacklisted-protocols: [ ]

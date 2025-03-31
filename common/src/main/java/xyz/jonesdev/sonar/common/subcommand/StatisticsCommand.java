@@ -32,8 +32,7 @@ import java.util.List;
 import static xyz.jonesdev.sonar.api.profiler.SimpleProcessProfiler.*;
 
 @SubcommandInfo(
-  name = "statistics",
-  aliases = {"stats"},
+  name = "stats",
   arguments = {"network", "memory", "cpu"},
   argumentsRequired = false
 )
